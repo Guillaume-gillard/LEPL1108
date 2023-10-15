@@ -6,29 +6,52 @@ def devoir1(trajets_train, durees_train, ville_depart, durees_voldirect, sacrifi
     # TO DO
 
     # Train 
+    ville = "bxl"
     N = []
-    Ns = []
+    Ns = [ville_depart]
     N_s = []
-    directory = {}
+    graph = {}
+    smallest_dist_train = {}
+    smallest_dist_plane = {}
+    count_train = 0
     for journey, duration in zip (trajets_train, durees_train):
         cities = tuple(journey.split("-"))
         city1, city2 = cities 
-        # checking if city1 is already in directory
-        if city1 in directory :
-            directory[city1][city2] = duration
+        if city1 not in smallest_dist_train :
+            smallest_dist_train[city1] = float("infinity")
+        if city2 not in smallest_dist_train :
+            smallest_dist_train[city2] = float("infinity")
+        if city1 not in N:
+            N.append(city1)
+        if city2 not in N:
+            N.append(city2)
+        # checking if city1 is already in graph
+        if city1 in graph :
+            graph[city1][city2] = duration
         else :
-            directory[city1] = {city2: duration}
-        # checking if city2 is already in directory
-        if city2 in directory :
-            directory[city2][city1] = duration
+            graph[city1] = {city2: duration}
+        # checking if city2 is already in graph
+        if city2 in graph :
+            graph[city2][city1] = duration
         else :
-            directory[city2] = {city1: duration}
-    print(directory)       
-
-
+            graph[city2] = {city1: duration}
+    #print(graph) 
+    smallest_dist_train[ville_depart] = 0
+    N_s = [x for x in N if x not in Ns]
+    #initialazing s-d-t
+    for city, cost in graph[ville_depart].items():
+        smallest_dist_train[city] = cost + 30
+    while N_s != []:
+        for city in N_s:
+            for connexion, cost in graph[city].items():
+                if smallest_dist_train[connexion] > smallest_dist_train[city] + 15 + cost:
+                    smallest_dist_train[connexion] = smallest_dist_train[city] + 15 + cost
+        Ns.append(city)
+        N_s.remove(city)
+    print(smallest_dist_train)
         
 
-    #return ville, min_distances_train, min_distances_avion, count_train
+    return ville, smallest_dist_train, smallest_dist_plane, count_train
 
 
 
