@@ -35,13 +35,13 @@ def devoir1(trajets_train, durees_train, ville_depart, durees_voldirect, sacrifi
     while N_s != []:
         for city in N_s:
             for connexion, cost in graph[city].items():
-                if smallest_dist_train[connexion] > smallest_dist_train[city] + 15 + cost:
-                    smallest_dist_train[connexion] = smallest_dist_train[city] + 15 + cost
+                smallest_dist_train[connexion] = min(smallest_dist_train[connexion], smallest_dist_train[city] + 15 + cost)
         Ns.append(city)
         N_s.remove(city)
     del smallest_dist_train[ville_depart]
     smallest_dist_train = {key: smallest_dist_train[key] for key in sorted(smallest_dist_train)}
     ville = list(smallest_dist_train.keys())
+    #---- Plane ----#
     min_distances_train = list(smallest_dist_train.values())
     min_distances_avion = [x + 180 for x in durees_voldirect]
     #---- checking plane vs train ----#
