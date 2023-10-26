@@ -80,7 +80,13 @@ class BinaryDomains():
             string: Résultat de l'addition x+y en binaire.
         """
         # BEGIN TODO
-        return 0
+        add_str = ""
+        for i in range(len(x)):
+            if x[i] == y[i]:
+                add_str = "0" + add_str
+            else :
+                add_str += "1" + add_str
+        return add_str
         # END TODO
 
     def multiply(self, x, y, pol):
