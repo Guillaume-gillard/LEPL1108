@@ -1,5 +1,3 @@
-import numpy
-
 class Translation():
 
     def toBinary(self, n):
@@ -83,9 +81,9 @@ class BinaryDomains():
         add_str = ""
         for i in range(len(x)):
             if x[i] == y[i]:
-                add_str = "0" + add_str
+                add_str += "0" 
             else :
-                add_str += "1" + add_str
+                add_str += "1" 
         return add_str
         # END TODO
 
@@ -105,7 +103,12 @@ class BinaryDomains():
             string: Résultat de la multiplication x*y en binaire.
         """
         # BEGIN TODO
-        return 0
+        mult_str = ""
+        a = Translation.toInt(x)
+        b = Translation.toInt(y)
+        mult_int = a and b
+        mult_str = Translation(mult_int)
+        return mult_str        
         # END TODO
 
     def inverse(self, x, pol):

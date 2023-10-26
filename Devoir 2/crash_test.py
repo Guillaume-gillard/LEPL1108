@@ -20,4 +20,4 @@ def toBinary(n):
 
 print(toBinary(4545156))
 
-print(int(10))
+print(4 and 2)

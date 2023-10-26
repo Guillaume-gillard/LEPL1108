@@ -1,4 +1,4 @@
-from reed_solomon import *
+from devoir2 import *
 
 if __name__ == "__main__":
     test1 = ["10100011", "10110100", "00010111"]
