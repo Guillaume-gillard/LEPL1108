@@ -1,3 +1,5 @@
+import numpy as np 
+
 class Translation():
 
     def toBinary(self, n):
@@ -103,13 +105,32 @@ class BinaryDomains():
             string: Résultat de la multiplication x*y en binaire.
         """
         # BEGIN TODO
-        mult_str = ""
-        a = Translation.toInt(x)
-        b = Translation.toInt(y)
-        mult_int = a and b
-        mult_str = Translation(mult_int)
-        return mult_str        
+        #### Utilisation de l'ia Copilot comme aide pour rédiger cette fonction ####
+        # Converting the binary representation to integers
+        x_int = int(x, 2)
+        y_int = int(y, 2)
+        pol_int = int(pol, 2)
+        result_int = 0
+
+        # Executing the algorithm
+        # We will use bitwise opperation on int for ex += => ^=, *= => <<=, /= => >>=, % => &=
+        while y_int > 0:
+            # if y0 = 1
+            if y_int & 1:
+                result_int ^= x_int # X0R operation = to addition in the binary field => result_int = result_int + x_int
+            x_int <<= 1 # Left shift of x_int => x_int = x_int * X where X is "10"
+            y_int >>= 1 # Right shift of y_int => y_int = y_int / X where X is "10"
+
+            # Si le bit le plus significatif de x est 1, effectuer la réduction avec le polynôme
+            if x_int & (1 << (len(pol) - 1)):
+                x_int ^= pol_int
+        # Converting result to binary form 
+        result_binary = bin(result_int)[2:] # [2:] to remove the "0b" at the beginning of the string
+        return result_binary.zfill(len(pol) - 1) # zfill to add 0 at the beginning of the string if needed
         # END TODO
+
+
+
 
     def inverse(self, x, pol):
         """
@@ -125,7 +146,19 @@ class BinaryDomains():
             string: Résultat de l'inversion en binaire.
         """
         # BEGIN TODO
-        return 0
+        l = []
+        x_int = int(x, 2)
+        pol_int = int(pol, 2)
+        x_inverse_int = 1
+        l.append(self.multiply(x, x, pol))
+        for i in range(1, 7):
+            l.append(int(self.multiply(l[i - 1], l[i - 1], pol), 2)) 
+        for j in l:
+            x_inverse_int <<= j
+        if x_inverse_int & (1 << (len(pol) - 1)):
+                x_inverse_int ^= pol_int
+        x_inverse = bin(x_inverse_int)[2:]
+        return x_inverse.zfill(len(pol) - 1)
         # END TODO
 
 
@@ -162,7 +195,10 @@ class ReedSolomon():
             (liste de string de taille n): Le message encodé.
         """
         # BEGIN TODO
-        return []
+        encoded_message = []
+        for word in message_original:
+            encoded_message += Translation().translateToMachine(word)
+        return encoded_message
         # END TODO
 
     def gaussian_elimination(self, y, Iy):
