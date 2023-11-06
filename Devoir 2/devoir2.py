@@ -147,17 +147,14 @@ class BinaryDomains():
         """
         # BEGIN TODO
         l = []
-        x_int = int(x, 2)
         pol_int = int(pol, 2)
-        x_inverse_int = 1
         l.append(self.multiply(x, x, pol))
+        x_inverse = bin(1)[2:]
         for i in range(1, 7):
-            l.append(int(self.multiply(l[i - 1], l[i - 1], pol), 2)) 
+            l.append(self.multiply(l[i - 1], l[i - 1], pol))
         for j in l:
-            x_inverse_int <<= j
-        if x_inverse_int & (1 << (len(pol) - 1)):
-                x_inverse_int ^= pol_int
-        x_inverse = bin(x_inverse_int)[2:]
+            x_inverse = self.multiply(x_inverse, j, pol)
+        print(x_inverse.zfill(len(pol) - 1))
         return x_inverse.zfill(len(pol) - 1)
         # END TODO
 
