@@ -154,13 +154,13 @@ class BinaryDomains():
             l.append(self.multiply(l[i - 1], l[i - 1], pol))
         for j in l:
             x_inverse = self.multiply(x_inverse, j, pol)
-        print(x_inverse.zfill(len(pol) - 1))
+        # no need to reduce the result because multiply return a result in the born of the polynom :))))
         return x_inverse.zfill(len(pol) - 1)
         # END TODO
 
 
 class ReedSolomon():
-    def __init__(self, k, n, x, pol):
+    def __init__(self, k, n, y, pol):
         """
         Args:
             k (int): dimension des messages à transmettre.
@@ -172,7 +172,7 @@ class ReedSolomon():
         self.t = Translation()
         self.k = k
         self.n = n
-        self.x = x
+        self.y = y
         self.pol = pol
 
     def _evaluate(self, polynome, x):
@@ -192,9 +192,7 @@ class ReedSolomon():
             (liste de string de taille n): Le message encodé.
         """
         # BEGIN TODO
-        encoded_message = []
-        for word in message_original:
-            encoded_message += Translation().translateToMachine(word)
+        encoded_message = [self._evaluate(self.t.translateToMachine(message_original), Yi) for Yi in self.y]
         return encoded_message
         # END TODO
 
