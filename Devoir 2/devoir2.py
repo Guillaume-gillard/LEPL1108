@@ -212,8 +212,26 @@ class ReedSolomon():
         Returns:
             (liste de string de taille k): Les coefficients (ai) de l'interpolation.
         """
+        """
+        if i != j:
+                    y[i] = self.f.add(self.f.multiply(y[i], y[j], self.pol), Iy[j])
+        """
         # BEGIN TODO
-        return []
+        k = len(y)
+        a = np.zeros(k)
+        V = np.zeros((k, k))
+        for i in range (k):
+            V[0] = [int(y[i], 2)**i for i in range (k)]
+        P = np.concatenate((V, [Iy]), axis=1)
+        for i in range (k):
+            for j in range (k):
+                if i != j :
+                    r = P[i, j] / P[j, j]
+                    for m in range(k+1):
+                        P[j, m] = P[j, m] - r * P[i, m]
+        for i in range(k):
+            a[i] = P[i, k] / P[i, i]
+        return a
         # END TODO
 
     def decoding(self, message_corrupted):
@@ -228,5 +246,18 @@ class ReedSolomon():
             (liste de string de taille k): Le message décodé. (si bool = False, alors retourner []).
         """
         # BEGIN TODO
-        return False, []
+        char_corrupted = 0
+        n = len(message_corrupted)
+        to_translate = []
+        for word in message_corrupted:
+            if "x" in word :
+                char_corrupted += 1
+            else :
+                to_translate.append(word)
+        if char_corrupted > n - self.k :
+            return False, []
+        else :
+            a = self.gaussian_elimination(self.y, to_translate)
+            message_decoded = self.t.translateToHuman(a)
+            return True, message_decoded
         # END TODO
