@@ -195,13 +195,6 @@ class ReedSolomon():
         encoded_message = [self._evaluate(self.t.translateToMachine(message_original), Yi) for Yi in self.y]
         return encoded_message
         # END TODO
-    
-    
-    def exp(self, base, exponent, pol):
-        result = '1'
-        for i in range(exponent):
-            result = self.f.multiply(result, base, pol)
-        return result
 
     def gaussian_elimination(self, y, Iy):
         """
@@ -227,10 +220,16 @@ class ReedSolomon():
         k = len(y)
         a = []
         P = []
+        # initizaling P
+        for i in range(k):
+            P.append([])
+            P[i] = [0] * (k+1)
         for i in range (k): 
-            P.append([self.exp(y[i], j, self.pol) for j in range (k)])
-        for i in range(len(P)):
-            P[i].append(Iy[i])
+            P[i][0] = self.t.toBinary(1)
+            P[i][1] = y[i]
+            P[i][-1] = Iy[i]
+            for j in range (2, k):
+                P[i][j] = self.f.multiply(P[i][j - 1], y[i], self.pol)    
         for i in range (k):
             for j in range (k):
                 if i != j :
@@ -239,6 +238,7 @@ class ReedSolomon():
                         P[j][m] = self.f.add(P[j][m], self.f.multiply(r, P[i][m], self.pol))
         for i in range(k):
             a.append(self.f.multiply(P[i][k], self.f.inverse(P[i][i], self.pol), self.pol))
+        print(a)
         return a
         # END TODO
 
@@ -269,5 +269,6 @@ class ReedSolomon():
         else :
             a = self.gaussian_elimination(y_to_translate, to_translate)
             message_decoded = self.t.translateToHuman(a)
-            return True, message_decoded
+            print(message_decoded)
+            return True, message_decoded[0]
         # END TODO
