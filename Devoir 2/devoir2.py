@@ -195,6 +195,13 @@ class ReedSolomon():
         encoded_message = [self._evaluate(self.t.translateToMachine(message_original), Yi) for Yi in self.y]
         return encoded_message
         # END TODO
+    
+    
+    def exp(self, base, exponent, pol):
+        result = '1'
+        for i in range(exponent):
+            result = self.f.multiply(result, base, pol)
+        return result
 
     def gaussian_elimination(self, y, Iy):
         """
@@ -218,19 +225,20 @@ class ReedSolomon():
         """
         # BEGIN TODO
         k = len(y)
-        a = np.zeros(k)
-        V = np.zeros((k, k))
-        for i in range (k):
-            V[0] = [int(y[i], 2)**i for i in range (k)]
-        P = np.concatenate((V, [Iy]), axis=1)
+        a = []
+        P = []
+        for i in range (k): 
+            P.append([self.exp(y[i], j, self.pol) for j in range (k)])
+        for i in range(len(P)):
+            P[i].append(Iy[i])
         for i in range (k):
             for j in range (k):
                 if i != j :
-                    r = P[i, j] / P[j, j]
+                    r = self.f.multiply(P[i][j], self.f.inverse(P[j][j], self.pol), self.pol)
                     for m in range(k+1):
-                        P[j, m] = P[j, m] - r * P[i, m]
+                        P[j][m] = self.f.add(P[j][m], self.f.multiply(r, P[i][m], self.pol))
         for i in range(k):
-            a[i] = P[i, k] / P[i, i]
+            a.append(self.f.multiply(P[i][k], self.f.inverse(P[i][i], self.pol), self.pol))
         return a
         # END TODO
 
@@ -249,15 +257,17 @@ class ReedSolomon():
         char_corrupted = 0
         n = len(message_corrupted)
         to_translate = []
-        for word in message_corrupted:
-            if "x" in word :
+        y_to_translate = []
+        for i in range(len(message_corrupted)):
+            if "x" in message_corrupted[i] :
                 char_corrupted += 1
-            else :
-                to_translate.append(word)
+            else : 
+                to_translate.append(message_corrupted[i])
+                y_to_translate.append(self.y[i])
         if char_corrupted > n - self.k :
             return False, []
         else :
-            a = self.gaussian_elimination(self.y, to_translate)
+            a = self.gaussian_elimination(y_to_translate, to_translate)
             message_decoded = self.t.translateToHuman(a)
             return True, message_decoded
         # END TODO
