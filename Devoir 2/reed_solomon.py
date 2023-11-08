@@ -218,7 +218,7 @@ class ReedSolomon():
         """
         # BEGIN TODO
         k = len(y)
-        a = []
+        a = [0] * k
         P = []
         # initizaling P
         for i in range(k):
@@ -230,14 +230,15 @@ class ReedSolomon():
             P[i][-1] = Iy[i]
             for j in range (2, k):
                 P[i][j] = self.f.multiply(P[i][j - 1], y[i], self.pol)    
+        
         for i in range (k):
             for j in range (k):
                 if i != j :
-                    r = self.f.multiply(P[i][j], self.f.inverse(P[j][j], self.pol), self.pol)
+                    r = self.f.multiply(P[j][i], self.f.inverse(P[i][i], self.pol), self.pol)
                     for m in range(k+1):
                         P[j][m] = self.f.add(P[j][m], self.f.multiply(r, P[i][m], self.pol))
         for i in range(k):
-            a.append(self.f.multiply(P[i][k], self.f.inverse(P[i][i], self.pol), self.pol))
+            a[i] = self.f.multiply(P[i][k], self.f.inverse(P[i][i], self.pol), self.pol)
         print(a)
         return a
         # END TODO
@@ -255,7 +256,6 @@ class ReedSolomon():
         """
         # BEGIN TODO
         char_corrupted = 0
-        n = len(message_corrupted)
         to_translate = []
         y_to_translate = []
         for i in range(len(message_corrupted)):
@@ -264,11 +264,11 @@ class ReedSolomon():
             else : 
                 to_translate.append(message_corrupted[i])
                 y_to_translate.append(self.y[i])
-        if char_corrupted > n - self.k :
+        if char_corrupted > self.n - self.k :
             return False, []
         else :
             a = self.gaussian_elimination(y_to_translate, to_translate)
             message_decoded = self.t.translateToHuman(a)
-            print(message_decoded)
-            return True, message_decoded[0]
+            print(message_decoded.strip())
+            return True, [message_decoded]
         # END TODO
