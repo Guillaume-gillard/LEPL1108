@@ -129,9 +129,6 @@ class BinaryDomains():
         return result_binary.zfill(len(pol) - 1) # zfill to add 0 at the beginning of the string if needed
         # END TODO
 
-
-
-
     def inverse(self, x, pol):
         """
         Inverse un élément (x^(-1)) du corps donné sous la forme d'une séquence binaire.
@@ -217,29 +214,27 @@ class ReedSolomon():
                     y[i] = self.f.add(self.f.multiply(y[i], y[j], self.pol), Iy[j])
         """
         # BEGIN TODO
-        k = len(y)
-        a = [0] * k
+        a = [0] * self.k
         P = []
         # initizaling P
-        for i in range(k):
+        for i in range(self.k):
             P.append([])
-            P[i] = [0] * (k+1)
-        for i in range (k): 
+            P[i] = [0] * (self.k+1)
+        for i in range (self.k): 
             P[i][0] = self.t.toBinary(1)
             P[i][1] = y[i]
             P[i][-1] = Iy[i]
-            for j in range (2, k):
+            for j in range (2, self.k):
                 P[i][j] = self.f.multiply(P[i][j - 1], y[i], self.pol)    
         
-        for i in range (k):
-            for j in range (k):
+        for i in range (self.k):
+            for j in range (self.k):
                 if i != j :
                     r = self.f.multiply(P[j][i], self.f.inverse(P[i][i], self.pol), self.pol)
-                    for m in range(k+1):
+                    for m in range(self.k+1):
                         P[j][m] = self.f.add(P[j][m], self.f.multiply(r, P[i][m], self.pol))
-        for i in range(k):
-            a[i] = self.f.multiply(P[i][k], self.f.inverse(P[i][i], self.pol), self.pol)
-        print(a)
+        for i in range(self.k):
+            a[i] = self.f.multiply(P[i][self.k], self.f.inverse(P[i][i], self.pol), self.pol)
         return a
         # END TODO
 
@@ -254,7 +249,6 @@ class ReedSolomon():
             (bool): True s'il est possible de décoder le message corrompu, False sinon.
             (liste de string de taille k): Le message décodé. (si bool = False, alors retourner []).
         """
-        # BEGIN TODO
         char_corrupted = 0
         to_translate = []
         y_to_translate = []
@@ -269,6 +263,5 @@ class ReedSolomon():
         else :
             a = self.gaussian_elimination(y_to_translate, to_translate)
             message_decoded = self.t.translateToHuman(a)
-            print(message_decoded.strip())
-            return True, [message_decoded]
-        # END TODO
+            print(message_decoded)
+            return True, message_decoded
