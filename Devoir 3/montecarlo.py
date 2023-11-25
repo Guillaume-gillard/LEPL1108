@@ -19,6 +19,19 @@ draw = np.zeros((N, len(nb_games)))
 # To do : fill in arrays win1 and draw
 # In order to do so, simulate games with the function connect4.run_game() 
 
+# simulating N (=10 here) times each number of games
+for i in range(N):
+    for n in range(len(nb_games)):
+        win1_count = 0
+        draw_count = 0
+        for j in range(nb_games[n]):
+            if connect4.run_game() == 1:
+                win1_count += 1
+            if connect4.run_game() == 0:
+                draw_count += 1  
+        win1[i][n] = win1_count/nb_games[n]*100 
+        draw[i][n] = draw_count/nb_games[n]*100
+                          
 
 ################################
 ### END : To do for students ###
@@ -43,7 +56,7 @@ plt.xlabel('Nombre de parties')
 plt.ylabel('Probabilite en %')
 plt.xscale("log")
 plt.ylim((-10,100))
-# plt.show()
+plt.show()
 
 elapsed = time.time() - t
 print('Elapsed time: ', elapsed)
