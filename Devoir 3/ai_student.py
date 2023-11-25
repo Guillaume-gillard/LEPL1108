@@ -2,9 +2,13 @@ def evaluate_board(board, player):
     score = 0
     opponent = 3 - player
     # checking if winning move
-    score += three_in_a_row(board, player)*100
+    score += four_in_a_row(board, player)*100
     # checking if opponent has winning move
-    score -= three_in_a_row(board, opponent)*100
+    score -= four_in_a_row(board, opponent)*100
+    # checking if 3 in a row with space to win
+    score += three_in_a_row(board, player)*50
+    # checking if opponent has 3 in a row with space to win
+    score -= three_in_a_row(board, opponent)*50
     # checking if 2 in a row with space to win 
     score += two_in_a_row(board, player)*10
     # checking if opponent has 2 in a row with space to win
@@ -113,35 +117,36 @@ def is_terminal_state(board):
             return False
     return False
 
-def minimax(board, depth, alpha, beta, maximizingPlayer):
+score_matrix = [0.8, 0.9, 1.0, 1.1, 1.0, 0.9, 0.8]
+
+def minimax(board, player, depth, alpha, beta, maximizingPlayer):
+    opponent = 3 - player
     if depth == 0 or is_terminal_state(board):
-        return evaluate_board(board, 1)
+        return evaluate_board(board, player)
     if maximizingPlayer:
-        maxEval = -float('inf')
+        value = -float('inf')
         for col in range(7):
             if is_valid_move(board, col):
                 row = get_next_row(board, col)
-                board[row][col] = 1
-                eval = minimax(board, depth - 1, alpha, beta, False)
+                board[row][col] = player
+                value = max(value, minimax(board, player, depth-1, alpha, beta, False))
                 board[row][col] = 0
-                maxEval = max(maxEval, eval)
-                alpha = max(alpha, eval)
-                if beta <= alpha:
+                alpha = max(alpha, value)
+                if value >= beta:
                     break
-        return maxEval
+        return value
     else:
-        minEval = float('inf')
+        value = float('inf')
         for col in range(7):
             if is_valid_move(board, col):
                 row = get_next_row(board, col)
-                board[row][col] = 2
-                eval = minimax(board, depth - 1, alpha, beta, True)
+                board[row][col] = opponent
+                value = min(value, minimax(board, opponent, depth-1, alpha, beta, True))
                 board[row][col] = 0
-                minEval = min(minEval, eval)
-                beta = min(beta, eval)
-                if beta <= alpha:
+                beta = min(beta, value)
+                if value <= alpha:
                     break
-        return minEval
+        return value
 
 def get_next_row(board, col):
     for row in range(6):
@@ -159,7 +164,7 @@ def ai_student(board, player):
         if is_valid_move(board, col):
             row = get_next_row(board, col)
             board[row][col] = player
-            score = minimax(board, 4, -float('inf'), float('inf'), False)
+            score = minimax(board, player, 5, -float('inf'), float('inf'), False)
             board[row][col] = 0
             if score > best_score:
                 best_score = score
