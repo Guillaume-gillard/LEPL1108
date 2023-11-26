@@ -3,6 +3,7 @@ import pygame
 import math
 import sys
 from ai_student import ai_student
+from ai_student_v2 import ai_student_v2
 from connect4 import ai_random
 
 BLUE = (0, 0, 255)
@@ -92,6 +93,7 @@ pygame.display.update()
 
 myfont = pygame.font.SysFont("monospace", 75)
 
+
 while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -106,30 +108,28 @@ while not game_over:
                 pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE/2)), RADIUS)
             pygame.display.update()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and turn == 0:  # Player's turn
             pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
-            if turn == 0:
-                posx = event.pos[0]
-                col = int(math.floor(posx/SQUARESIZE))
+            posx = event.pos[0]
+            col = int(math.floor(posx/SQUARESIZE))
 
-                if is_valid_location(board, col):
-                    row = get_next_open_row(board, col)
-                    drop_piece(board, row, col, 1)
+            if is_valid_location(board, col):
+                row = get_next_open_row(board, col)
+                drop_piece(board, row, col, 1)
 
-                    if winning_move(board, 1):
-                        label = myfont.render("You wins!!", 1, RED)
-                        screen.blit(label, (40,10))
-                        game_over = True
+                if winning_move(board, 1):
+                    label = myfont.render("You win!!", 1, RED)
+                    screen.blit(label, (40,10))
+                    game_over = True
 
-                turn += 1
-                turn = turn % 2
+                turn = 1  # Switch to AI's turn
 
         # AI's turn
         if turn == 1 and not game_over:
-            col = ai_student(board, 2)
+            col = ai_student_v2(board, 2)
 
             if is_valid_location(board, col):
-                pygame.time.wait(500)
+                pygame.time.wait(50)
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, 2)
 
@@ -138,11 +138,10 @@ while not game_over:
                     screen.blit(label, (40,10))
                     game_over = True
 
-            turn += 1
-            turn = turn % 2
+                turn = 0  # Switch to player's turn
 
         #print_board(board)
         draw_board(board)
 
         if game_over:
-            pygame.time.wait(3000)
+            pygame.time.wait(300)

@@ -1,22 +1,28 @@
+import random 
+
+
+ROW_COUNT = 6
+COLUMN_COUNT = 7
+
 def evaluate_board(board, player):
     score = 0
     opponent = 3 - player
     # checking if winning move
-    score += four_in_a_row(board, player)*100
+    #score += four_in_a_row(board, player)*100
     # checking if opponent has winning move
-    score -= four_in_a_row(board, opponent)*100
+    #score -= four_in_a_row(board, opponent)*100
     # checking if 3 in a row with space to win
-    score += three_in_a_row(board, player)*50
+    score += three_in_a_row(board, player)*100
     # checking if opponent has 3 in a row with space to win
-    score -= three_in_a_row(board, opponent)*50
+    score -= three_in_a_row(board, opponent)*100
     # checking if 2 in a row with space to win 
-    score += two_in_a_row(board, player)*10
+    score += two_in_a_row(board, player)*50
     # checking if opponent has 2 in a row with space to win
-    score -= two_in_a_row(board, opponent)*10
+    score -= two_in_a_row(board, opponent)*50
     # checking if 1 in a row with space to win
-    score += one_in_a_row(board, player)*1
+    score += one_in_a_row(board, player)*10
     # checking if opponent has 1 in a row with space to win
-    score -= one_in_a_row(board, opponent)*1
+    score -= one_in_a_row(board, opponent)*10
     return score
 
 def four_in_a_row(board, player):
@@ -115,23 +121,26 @@ def is_terminal_state(board):
     for col in range(7):
         if board[0][col] == 0:
             return False
-    return False
+    return True
 
-score_matrix = [0.8, 0.9, 1.0, 1.1, 1.0, 0.9, 0.8]
+score_matrix = [0.2, 0.5, 1.0, 3, 1.0, 0.5, 0.2]
 
 def minimax(board, player, depth, alpha, beta, maximizingPlayer):
     opponent = 3 - player
     if depth == 0 or is_terminal_state(board):
+        print("terminal state")
         return evaluate_board(board, player)
+    
     if maximizingPlayer:
         value = -float('inf')
         for col in range(7):
             if is_valid_move(board, col):
                 row = get_next_row(board, col)
                 board[row][col] = player
-                value = max(value, minimax(board, player, depth-1, alpha, beta, False))
-                board[row][col] = 0
+                value = max(value, minimax(board, opponent, depth-1, alpha, beta, False) * score_matrix[col])
+                print("maximizing value: ", value)
                 alpha = max(alpha, value)
+                board[row][col] = 0  
                 if value >= beta:
                     break
         return value
@@ -141,9 +150,10 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
             if is_valid_move(board, col):
                 row = get_next_row(board, col)
                 board[row][col] = opponent
-                value = min(value, minimax(board, opponent, depth-1, alpha, beta, True))
-                board[row][col] = 0
+                value = min(value, minimax(board, player, depth-1, alpha, beta, True) * score_matrix[col])
+                print("minimizing value: ", value)
                 beta = min(beta, value)
+                board[row][col] = 0  
                 if value <= alpha:
                     break
         return value
@@ -152,21 +162,40 @@ def get_next_row(board, col):
     for row in range(6):
         if board[5-row][col] == 0:
             return 5-row
-    return None
         
 def is_valid_move(board, col):
     return board[0][col] == 0
 
+
+
+
 def ai_student(board, player):
-    best_score = -float('inf')
-    choosen_col = -1
-    for col in range(7):
-        if is_valid_move(board, col):
-            row = get_next_row(board, col)
-            board[row][col] = player
-            score = minimax(board, player, 5, -float('inf'), float('inf'), False)
+    valid_moves = [col for col in range(7) if is_valid_move(board, col)]
+    random.shuffle(valid_moves)  # Shuffle for random move selection among equally good moves
+    opponent = 3 - player
+    # Checking if any move blocks opponent's winning move
+    for col in valid_moves:
+        row = get_next_row(board, col)
+        board[row][col] = opponent
+        if four_in_a_row(board, opponent) > 0:
             board[row][col] = 0
-            if score > best_score:
-                best_score = score
-                choosen_col = col
-    return choosen_col
+            print('Blocked by opponent at col', col)
+            return col
+        board[row][col] = 0
+
+    # If no move blocks the opponent, choose the best move based on minimax
+    best_score = -float('inf')
+    chosen_col = -1
+    for col in valid_moves:
+        row = get_next_row(board, col)
+        board[row][col] = player
+        score = minimax(board, player, 5, -float('inf'), float('inf'), False)
+        board[row][col] = 0
+        print(f'Move at col {col} with score {score}')
+        if score > best_score:
+            best_score = score
+            chosen_col = col
+
+    print('Chosen col: ', chosen_col, ' with score: ', best_score)
+    return chosen_col
+
