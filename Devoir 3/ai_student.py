@@ -53,23 +53,23 @@ def check_win(board, player):
 def evaluate_board(board, player):
     score = 0
     opponent = 1 if player == 2 else 2
-    for col in range(COLUMN_COUNT):
-        if is_valid_move(board, col):
-            if is_winning_move(board, opponent, col):
-                score -= 100
-    if three_in_a_row(board, player) > 0:
-        score += 50
-    if two_in_a_row(board, player) > 0:
+    for i in range(four_in_a_row(board, player)):
+        score += 1000
+    for i in range(four_in_a_row(board, opponent)):
+        score -= 1000
+    for i in range(three_in_a_row(board, player)):
+        score += 100
+    for i in range(three_in_a_row(board, opponent)):
+        score -= 100
+    for i in range(two_in_a_row(board, player)):
         score += 10
-    if one_in_a_row(board, player) > 0:
-        score += 1
-    if three_in_a_row(board, opponent) > 0:
-        score -= 50
-    if two_in_a_row(board, opponent) > 0:
+    for i in range(two_in_a_row(board, opponent)):
         score -= 10
-    if one_in_a_row(board, opponent) > 0:
-        score -= 1
-    return score   
+    for i in range(one_in_a_row(board, player)):
+        score += 1
+    for i in range(one_in_a_row(board, opponent)):
+        score -= 1 
+    return score
 
 def four_in_a_row(board, player):
     # Check horizontal 
@@ -176,6 +176,8 @@ score_matrix = [0.2, 0.5, 1.0, 3, 1.0, 0.5, 0.2]
 
 def minimax(board, player, depth, alpha, beta, maximizingPlayer):
     opponent = 1 if player == 2 else 2
+    if str(board) in database:
+        return database[str(board)]
     if depth == 0 or is_terminal_state(board):
         #print("terminal state")
         return evaluate_board(board, player)
@@ -192,7 +194,7 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
                 board[row][col] = 0  
                 if value >= beta:
                     break     
-        #database[str(board)] = value
+        database[str(board)] = value
         return value
     else:
         value = float('inf')
@@ -206,7 +208,7 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
                 board[row][col] = 0  
                 if value <= alpha:
                     break
-        #database[str(board)] = value
+        database[str(board)] = value
         return value
 
 def ai_student(board, player):
@@ -215,12 +217,16 @@ def ai_student(board, player):
     # listing all the legit move
     legit_moves = [col for col in range(7) if is_valid_move(board, col)]
     random.shuffle(legit_moves)  # Shuffle for random move selection among equally good moves
+    
     best_score = -float('inf')
     chosen_col = -1
     for col in legit_moves:
         row = get_row(board, col)
         board[row][col] = player
-        score = minimax(board, player, 3, -float('inf'), float('inf'), False)
+        if str(board) in database:
+            score = database(str(board))
+        else :
+            score = minimax(board, player, 3, -float('inf'), float('inf'), False)
         board[row][col] = 0
         #print(f'Move at col {col} with score {score}')
         if score > best_score:
