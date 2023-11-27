@@ -8,8 +8,8 @@ import math
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 SQUARE_SIZE = 100
-WIDTH = COLUMN_COUNT * SQUARE_SIZE
 HEIGHT = (ROW_COUNT + 1) * SQUARE_SIZE  # Extra row for the header
+WIDTH = COLUMN_COUNT * SQUARE_SIZE
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -116,7 +116,8 @@ myfont = pygame.font.SysFont("monospace", 75)
 while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit()
+            pygame.quit()
+            sys.exit() 
 
         if event.type == pygame.MOUSEMOTION:
             pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
@@ -132,6 +133,7 @@ while not game_over:
             col = int(math.floor(posx/SQUARESIZE))
 
             if is_valid_location(board, col):
+                print("Human play", col)
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, 1)
 
@@ -142,8 +144,10 @@ while not game_over:
                     label = myfont.render("You win!!", 1, RED)
                     screen.blit(label, (40, 10))
                     pygame.display.update()
-                    pygame.time.wait(2000)  # Delay for 2000 milliseconds (2 seconds) before exiting
-                    game_over = True
+                    while True:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
 
                 turn = 1  # Switch to AI's turn
 
@@ -163,8 +167,10 @@ while not game_over:
                     label = myfont.render("AI wins!!", 1, YELLOW)
                     screen.blit(label, (40, 10))
                     pygame.display.update()
-                    pygame.time.wait(2000)  # Delay for 2000 milliseconds (2 seconds) before exiting
-                    game_over = True
+                    while True:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
 
                 turn = 0  # Switch to player's turn
 

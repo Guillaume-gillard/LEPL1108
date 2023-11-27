@@ -18,9 +18,7 @@ def get_row(board, col):
         
 def is_winning_move(board, player, move):
     row = get_row(board, move)
-    # making the move 
     board[row][move] = player
-    # checking if the move is a winning move
     if check_win(board, player):
         # undo the move 
         board[row][move] = 0
@@ -54,7 +52,11 @@ def check_win(board, player):
 
 def evaluate_board(board, player):
     score = 0
-    opponent = 3 - player
+    opponent = 1 if player == 2 else 2
+    for col in range(COLUMN_COUNT):
+        if is_valid_move(board, col):
+            if is_winning_move(board, opponent, col):
+                score -= 100
     if three_in_a_row(board, player) > 0:
         score += 50
     if two_in_a_row(board, player) > 0:
@@ -171,8 +173,6 @@ score_matrix = [0.2, 0.5, 1.0, 3, 1.0, 0.5, 0.2]
 
 def minimax(board, player, depth, alpha, beta, maximizingPlayer):
     opponent = 1 if player == 2 else 2
-    if database.get(str(board)) != None:
-        return database.get(str(board))
     if depth == 0 or is_terminal_state(board):
         #print("terminal state")
         return evaluate_board(board, player)
@@ -189,7 +189,7 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
                 board[row][col] = 0  
                 if value >= beta:
                     break     
-        database[str(board)] = value
+        #database[str(board)] = value
         return value
     else:
         value = float('inf')
@@ -203,28 +203,15 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
                 board[row][col] = 0  
                 if value <= alpha:
                     break
-        database[str(board)] = value
+        #database[str(board)] = value
         return value
 
 def ai_student(board, player):
-    #print("my turn")
+    #print("AI turn :))")
     opponent = 1 if player == 2 else 2
     # listing all the legit move
     legit_moves = [col for col in range(7) if is_valid_move(board, col)]
-    #random.shuffle(legit_moves)  # Shuffle for random move selection among equally good moves
-    # check if there is a winning move
-    for col in legit_moves:
-        if is_winning_move(board, player, col):
-            return col
-    # checking is there is a move that blocks the opponent from winning
-    for col in legit_moves:
-        if is_winning_move(board, opponent, col):
-            #print("i go", col)
-            #print("opponent blocked")
-            return col
-        #print("col", col, "is safe")
-
-    # If no move blocks the opponent, choose the best move based on minimax
+    random.shuffle(legit_moves)  # Shuffle for random move selection among equally good moves
     best_score = -float('inf')
     chosen_col = -1
     for col in legit_moves:

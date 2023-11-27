@@ -20,19 +20,20 @@ draw = np.zeros((N, len(nb_games)))
 # In order to do so, simulate games with the function connect4.run_game() 
 
 # simulating N (=10 here) times each number of games
-for i in range(N):
+for i in range(1):
     print("Simulation number: ", i + 1, " out of ", N)
-    for n in range(len(nb_games)):
-        print("Number of games: ", nb_games[n])
+    for n in range(10):
+        print("Number of games: ", n)
         win1_count = 0
         draw_count = 0
-        for j in range(nb_games[n]):
+        for j in range(1):
+            print("Game number: ", j + 1, " out of ", 1)
             if connect4.run_game() == 1:
                 win1_count += 1
             if connect4.run_game() == 0:
                 draw_count += 1  
-        win1[i][n] = win1_count/nb_games[n]*100 
-        draw[i][n] = draw_count/nb_games[n]*100
+        win1[1][1] += win1_count / 1
+        draw[1][1] += draw_count / 1
                           
 
 ################################
