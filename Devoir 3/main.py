@@ -1,6 +1,7 @@
 import pygame
 import sys
 from ai_student import ai_student
+from connect4 import ai_random
 import numpy as np
 import math
 

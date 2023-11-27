@@ -53,21 +53,21 @@ def check_win(board, player):
 def evaluate_board(board, player):
     score = 0
     opponent = 1 if player == 2 else 2
-    for col in range(COLUMN_COUNT):
-        if is_valid_move(board, col):
-            if is_winning_move(board, opponent, col):
-                score -= 100
-    if three_in_a_row(board, player) > 0:
+    for i in range(four_in_a_row(board, player)):
+        score += 100
+    for i in range(four_in_a_row(board, opponent)):
+        score -= 100
+    for i in range(three_in_a_row(board, player)):
         score += 50
-    if two_in_a_row(board, player) > 0:
+    for i in range(two_in_a_row(board, player)):
         score += 10
-    if one_in_a_row(board, player) > 0:
+    for i in range(one_in_a_row(board, player)):
         score += 1
-    if three_in_a_row(board, opponent) > 0:
+    for i in range(three_in_a_row(board, opponent)):
         score -= 50
-    if two_in_a_row(board, opponent) > 0:
+    for i in range(two_in_a_row(board, opponent)):
         score -= 10
-    if one_in_a_row(board, opponent) > 0:
+    for i in range(one_in_a_row(board, opponent)):
         score -= 1
     return score    
 
@@ -227,5 +227,6 @@ def ai_student(board, player):
     #print('Chosen col: ', chosen_col, ' with score: ', best_score)
     return chosen_col
 
-
-
+""""
+60 pourcent de win rate contre random
+""""
