@@ -21,7 +21,9 @@ draw = np.zeros((N, len(nb_games)))
 
 # simulating N (=10 here) times each number of games
 for i in range(N):
+    print("Simulation number: ", i + 1, " out of ", N)
     for n in range(len(nb_games)):
+        print("Number of games: ", nb_games[n])
         win1_count = 0
         draw_count = 0
         for j in range(nb_games[n]):

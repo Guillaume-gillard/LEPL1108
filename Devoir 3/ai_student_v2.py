@@ -37,25 +37,25 @@ def is_terminal_state(board):
     return True
 
 def check_win(board, player):
-    # Check horizontal locations for win
+    # Check horizontal 
     for c in range(COLUMN_COUNT-3):
         for r in range(ROW_COUNT):
             if board[r][c] == player and board[r][c+1] == player and board[r][c+2] == player and board[r][c+3] == player:
                 return True
 
-    # Check vertical locations for win
+    # Check vertical 
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT-3):
             if board[r][c] == player and board[r+1][c] == player and board[r+2][c] == player and board[r+3][c] == player:
                 return True
 
-    # Check positively sloped diagonals
+    # Check down right diagonals
     for c in range(COLUMN_COUNT-3):
         for r in range(ROW_COUNT-3):
             if board[r][c] == player and board[r+1][c+1] == player and board[r+2][c+2] == player and board[r+3][c+3] == player:
                 return True
 
-    # Check negatively sloped diagonals
+    # Check down left diagonals
     for c in range(COLUMN_COUNT-3):
         for r in range(3, ROW_COUNT):
             if board[r][c] == player and board[r-1][c+1] == player and board[r-2][c+2] == player and board[r-3][c+3] == player:
