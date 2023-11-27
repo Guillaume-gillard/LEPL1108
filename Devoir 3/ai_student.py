@@ -54,9 +54,9 @@ def evaluate_board(board, player):
     score = 0
     opponent = 1 if player == 2 else 2
     for i in range(four_in_a_row(board, player)):
-        score += 100
+        score += 1000
     for i in range(four_in_a_row(board, opponent)):
-        score -= 100
+        score -= 1000
     for i in range(three_in_a_row(board, player)):
         score += 50
     for i in range(two_in_a_row(board, player)):
@@ -72,26 +72,29 @@ def evaluate_board(board, player):
     return score    
 
 def four_in_a_row(board, player):
+    # Check horizontal 
     score = 0
-    for col in range(7):
-        for row in range(6):
-            # checking horizontal
-            if col+3 < 7:
+    for col in range(COLUMN_COUNT):
+        for row in range(ROW_COUNT):
+            if col+3 < 7:  
                 if board[row][col] == player and board[row][col+1] == player and board[row][col+2] == player and board[row][col+3] == player:
                     score += 1
-            # checking vertical
+
+            # Check vertical
             if row+3 < 6:
                 if board[row][col] == player and board[row+1][col] == player and board[row+2][col] == player and board[row+3][col] == player:
                     score += 1
-            # checking down left diag
-            if col-3 >= 0 and row+3 < 6:
-                if board[row][col] == player and board[row+1][col-1] == player and board[row+2][col-2] == player and board[row+3][col-3] == player:
-                    score += 1
-            # checking down right diag
+
+            # Check down right diagonals
             if col+3 < 7 and row+3 < 6:
                 if board[row][col] == player and board[row+1][col+1] == player and board[row+2][col+2] == player and board[row+3][col+3] == player:
                     score += 1
-    return score 
+
+            # Check down left diagonals
+            if col-3 >= 0 and row+3 < 6:
+                if board[row][col] == player and board[row+1][col-1] == player and board[row+2][col-2] == player and board[row+3][col-3] == player:
+                    score += 1
+    return score
 
 def three_in_a_row(board, player):
     score = 0
