@@ -224,7 +224,7 @@ def ai_student(board, player):
         row = get_row(board, col)
         board[row][col] = player
         if str(board) in database:
-            score = database(str(board))
+            score = database.get(str(board))
         else :
             score = minimax(board, player, 3, -float('inf'), float('inf'), False)
         board[row][col] = 0
