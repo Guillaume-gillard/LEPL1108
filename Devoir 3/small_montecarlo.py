@@ -22,9 +22,9 @@ for i in range(N):
         draw_count += 1
 
     # Calculate and store win rates after each game
-    win1_rate.append(win1_count / (i+1))
-    win2_rate.append(win2_count / (i+1))
-    draw_rate.append(draw_count / (i+1))
+    win1_rate.append(win1_count / (i + 1))
+    win2_rate.append(win2_count / (i + 1))
+    draw_rate.append(draw_count / (i + 1))
 
 
 # Calculate win rates

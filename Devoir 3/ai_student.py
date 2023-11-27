@@ -53,23 +53,23 @@ def check_win(board, player):
 def evaluate_board(board, player):
     score = 0
     opponent = 1 if player == 2 else 2
-    for i in range(four_in_a_row(board, player)):
-        score += 1000
-    for i in range(four_in_a_row(board, opponent)):
-        score -= 1000
-    for i in range(three_in_a_row(board, player)):
+    for col in range(COLUMN_COUNT):
+        if is_valid_move(board, col):
+            if is_winning_move(board, opponent, col):
+                score -= 100
+    if three_in_a_row(board, player) > 0:
         score += 50
-    for i in range(two_in_a_row(board, player)):
+    if two_in_a_row(board, player) > 0:
         score += 10
-    for i in range(one_in_a_row(board, player)):
+    if one_in_a_row(board, player) > 0:
         score += 1
-    for i in range(three_in_a_row(board, opponent)):
+    if three_in_a_row(board, opponent) > 0:
         score -= 50
-    for i in range(two_in_a_row(board, opponent)):
+    if two_in_a_row(board, opponent) > 0:
         score -= 10
-    for i in range(one_in_a_row(board, opponent)):
+    if one_in_a_row(board, opponent) > 0:
         score -= 1
-    return score    
+    return score   
 
 def four_in_a_row(board, player):
     # Check horizontal 
@@ -186,7 +186,7 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
             if is_valid_move(board, col):
                 row = get_row(board, col)
                 board[row][col] = player
-                value = max(value, minimax(board, opponent, depth-1, alpha, beta, False)*score_matrix[col])
+                value = max(value, minimax(board, player, depth-1, alpha, beta, False)*score_matrix[col])
                 #print("maximizing value: ", value)
                 alpha = max(alpha, value)
                 board[row][col] = 0  
@@ -229,7 +229,3 @@ def ai_student(board, player):
 
     #print('Chosen col: ', chosen_col, ' with score: ', best_score)
     return chosen_col
-
-""""
-60 pourcent de win rate contre random
-"""
