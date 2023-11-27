@@ -217,7 +217,7 @@ def ai_student(board, player):
     for col in legit_moves:
         row = get_row(board, col)
         board[row][col] = player
-        score = minimax(board, player, 4, -float('inf'), float('inf'), False)
+        score = minimax(board, player, 3, -float('inf'), float('inf'), False)
         board[row][col] = 0
         #print(f'Move at col {col} with score {score}')
         if score > best_score:
@@ -229,4 +229,4 @@ def ai_student(board, player):
 
 """"
 60 pourcent de win rate contre random
-""""
+"""
