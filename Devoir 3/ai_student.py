@@ -20,10 +20,8 @@ def is_winning_move(board, player, move):
     row = get_row(board, move)
     board[row][move] = player
     if check_win(board, player):
-        # undo the move 
         board[row][move] = 0
         return True
-    # undo the move 
     board[row][move] = 0
     return False
 
@@ -34,17 +32,14 @@ def check_win(board, player):
             if col+3 < 7:  
                 if board[row][col] == player and board[row][col+1] == player and board[row][col+2] == player and board[row][col+3] == player:
                     return True
-
             # Check vertical
             if row+3 < 6:
                 if board[row][col] == player and board[row+1][col] == player and board[row+2][col] == player and board[row+3][col] == player:
                     return True
-
             # Check down right diagonals
             if col+3 < 7 and row+3 < 6:
                 if board[row][col] == player and board[row+1][col+1] == player and board[row+2][col+2] == player and board[row+3][col+3] == player:
                     return True
-
             # Check down left diagonals
             if col-3 >= 0 and row+3 < 6:
                 if board[row][col] == player and board[row+1][col-1] == player and board[row+2][col-2] == player and board[row+3][col-3] == player:
@@ -79,17 +74,14 @@ def four_in_a_row(board, player):
             if col+3 < 7:  
                 if board[row][col] == player and board[row][col+1] == player and board[row][col+2] == player and board[row][col+3] == player:
                     score += 1
-
             # Check vertical
             if row+3 < 6:
                 if board[row][col] == player and board[row+1][col] == player and board[row+2][col] == player and board[row+3][col] == player:
                     score += 1
-
             # Check down right diagonals
             if col+3 < 7 and row+3 < 6:
                 if board[row][col] == player and board[row+1][col+1] == player and board[row+2][col+2] == player and board[row+3][col+3] == player:
                     score += 1
-
             # Check down left diagonals
             if col-3 >= 0 and row+3 < 6:
                 if board[row][col] == player and board[row+1][col-1] == player and board[row+2][col-2] == player and board[row+3][col-3] == player:
@@ -179,7 +171,6 @@ def minimax(board, player, depth, alpha, beta, maximizingPlayer):
     if str(board) in database:
         return database[str(board)]
     if depth == 0 or is_terminal_state(board):
-        #print("terminal state")
         return evaluate_board(board, player)
     
     if maximizingPlayer:
@@ -216,8 +207,7 @@ def ai_student(board, player):
     opponent = 1 if player == 2 else 2
     # listing all the legit move
     legit_moves = [col for col in range(7) if is_valid_move(board, col)]
-    random.shuffle(legit_moves)  # Shuffle for random move selection among equally good moves
-    
+    random.shuffle(legit_moves)  # Shuffle for random move selection 
     best_score = -float('inf')
     chosen_col = -1
     for col in legit_moves:
@@ -232,6 +222,5 @@ def ai_student(board, player):
         if score > best_score:
             best_score = score
             chosen_col = col
-
     #print('Chosen col: ', chosen_col, ' with score: ', best_score)
     return chosen_col
