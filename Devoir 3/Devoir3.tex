@@ -118,8 +118,13 @@ On considère l'état du plateau représenté en Figure \ref{fig:bound}, et on d
 \end{figure}
 
 \begin{solutionbox}{210mm}
-Insérez votre réponse ci-dessous.
+Le joueur jaune n'a aucune influence sur le jeu en raison de la disposition du plateau, il est obligé de suivre le joueur rouge. Nous nous intéressons donc uniquement au joueur rouge. On constate que le joueur rouge joue 18 coups au cours de sa partie. Il y a donc 18 permutations possibles pour les coups joués par le joueur rouge. Cependant, on constate que certaines permutations défient la gravité.
 
+En effet, on ne peut pas permuter l'ordre de coups situés l'un au-dessus de l'autre. Il y a donc 3 coups par colonne, et donc 3! permutations à supprimer par colonne.
+
+Pour éliminer les permutations impossibles, il nous suffit de diviser le nombre total de permutations par le nombre de permutations indésirables.
+On obtient donc $\frac{18!}{(3!)^6} = 1.2 \times 10^{11}$
+ parties possibles. Le exposant 6 est dû au fait qu'il y a 6 colonnes.
 
 \end{solutionbox}
 
@@ -171,8 +176,7 @@ Sur base du graphique obtenu, répondez aux questions suivantes :
 1. Y a-t-il un avantage à commencer la partie ? Justifiez votre réponse sur base de votre graphique, en mentionnant les probabilités moyennes obtenues pour $10^4$ parties.
     
 \begin{solutionbox}{25mm}
-Insérez votre réponse ci-dessous.
-
+Oui il y a un grand avantage a commencer la partie en 1e comme un peu le voir sur le graphe le joueur qui commence en premier à bien plus de chance de gagner que le joueur 2.
 
 \end{solutionbox}
 
@@ -185,8 +189,7 @@ Insérez votre réponse ci-dessous.
 Justifiez votre réponse sur base de votre graphique. Cette notion sera approfondie en cours.
 
 \begin{solutionbox}{25mm}
-Insérez votre réponse ci-dessous.
-
+On peut voir que la distance evolue en 1/sqrt(n)
 
 \end{solutionbox}
 
@@ -254,10 +257,11 @@ Maintenant que vous avez codé votre IA \texttt{ai\_student}, il vous suffit de 
 \emph{Cas 1:} Le joueur 1 joue \texttt{ai\_student.} et le joueur 2 joue \texttt{ai\_random.}
 
 \begin{solutionbox}{100mm}
-Insérez le graphe et mentionnez les probabilités moyennes obtenues pour $10^4$ parties.
+Moyenne obtenue pour 5 repetitions de 10, 100 et 1000 parties lorsque l'IA joue en 1ere position.\newline
+Note : Mon ia prennant trop de temps pour 10000 parties je n'ai pas pu calculer la moyenne pour 10000 parties car ca me prennait 13 heures voir plus pour calculer. J'ai donc reduit le nombre de simulations a 1000 pour pouvoir calculer la moyenne. Celle ci n'est donc pas totalement representative.
 
 \centering
-\includegraphics[width=0.75\textwidth]{MCplot_empty.png}
+\includegraphics[width=0.75\textwidth]{ai_student_player=1_N=5.png}
 \end{solutionbox}
 
 \medskip
@@ -268,7 +272,8 @@ Insérez le graphe et mentionnez les probabilités moyennes obtenues pour $10^4$
 Insérez le graphe et mentionnez les probabilités moyennes obtenues pour $10^4$ parties.
 
 \centering
-\includegraphics[width=0.75\textwidth]{MCplot_empty.png}
+La moyenne obtenue pour 5 repetitions de 10, 100 et 1000 parties lorsque l'IA joue en 2e position :
+\includegraphics[width=0.75\textwidth]{ai_student_player=1_N=5.png}
 \end{solutionbox}
 
 
