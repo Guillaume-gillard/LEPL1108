@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1701276293 "c:/Users/gilla/OneDrive - UCL/Bac 2/Q3/Math discrete/LEPL1108/Devoir 3/Devoir3.tex" "Devoir3.pdf" "Devoir3" 1701276295 0
+["pdflatex"] 1701289696 "c:/Users/gilla/OneDrive - UCL/Bac 2/Q3/Math discrete/LEPL1108/Devoir 3/Devoir3.tex" "Devoir3.pdf" "Devoir3" 1701289698 0
   "C:/Users/gilla/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1701276265 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/gilla/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1701276196 24213232 6c5c9a302f5ad40057c444b753f1cc69 ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -20,6 +20,7 @@
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr10.tfm" 1256929440 12056 7e13df7fe4cbce21b072ba7c4f4deb6e ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr12.tfm" 1256929440 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr6.tfm" 1256929440 12048 c1068d0f4772be9b0ec447692e1d6d82 ""
+  "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr8.tfm" 1256929440 12064 9b9ade9f64cb32ce1d9a88d21fbd5c2d ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr9.tfm" 1256929440 12084 b7f5e4c003de6f57f07c7e9fee73a37c ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmri10.tfm" 1256929440 17148 9556e1b5f936b77a796f68d2d559ba99 ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmri12.tfm" 1256929440 17144 271aaf9ebb339934b04110dc5211fba4 ""
@@ -210,14 +211,14 @@
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1700599895 10214 547fd4d29642cb7c80bf54b49d447f01 ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/gilla/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "Devoir3.aux" 1701276295 2268 55a82717775d914625a56d63ae25c0da "pdflatex"
-  "Devoir3.out" 1701276295 867 e241a07c1202d9e75b9cb92591390ae7 "pdflatex"
-  "Devoir3.tex" 1701276292 17224 67557bedfff6056fb87ca6a9ef120810 ""
-  "MCplot_empty.png" 1700325058 21603 693594a932a9655194560026e9475a11 ""
+  "Devoir3.aux" 1701289697 2268 775e36cf7194a5f0c44c9c91b3c6829e "pdflatex"
+  "Devoir3.out" 1701289697 867 e241a07c1202d9e75b9cb92591390ae7 "pdflatex"
+  "Devoir3.tex" 1701289693 17198 f5bc3426d3c97f0f0d9e94aae298644d ""
+  "ai_random_plot.png" 1701287368 23759 1b3eaeeb40b893446abc254645b2e16d ""
   "ai_student.py" 1701250197 9276 6e0a2eeed6c3f7cfaea356f7431051d6 ""
-  "ai_student_player=1_N=5.png" 1701260173 26688 e1d5d60e171b5c3a7347a7a06c21fa48 ""
+  "ai_student_player=1_N=5.png" 1701286708 22713 b8d1a3e7724d7d3a456620fd983e9989 ""
   "board.png" 1700325058 1152628 fbbe65e0aa485068afca3d837c5ca0ec ""
-  "c:/Users/gilla/OneDrive - UCL/Bac 2/Q3/Math discrete/LEPL1108/Devoir 3/Devoir3.tex" 1701276292 17224 67557bedfff6056fb87ca6a9ef120810 ""
+  "c:/Users/gilla/OneDrive - UCL/Bac 2/Q3/Math discrete/LEPL1108/Devoir 3/Devoir3.tex" 1701289693 17198 f5bc3426d3c97f0f0d9e94aae298644d ""
   "dev3.png" 1700325058 4406781 009b803a127dbcf498ff6f0f822827c4 ""
   (generated)
   "Devoir3.aux"

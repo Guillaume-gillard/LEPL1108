@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.11.29)  29 NOV 2023 17:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.11.29)  29 NOV 2023 21:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -803,32 +803,32 @@ File: board.png Graphic file (type png)
 Package pdftex.def Info: board.png  used on input line 115.
 (pdftex.def)             Requested size: 281.85587pt x 224.32727pt.
  [2 <./board.png>] [3{C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<MCplot_empty.png, id=61, 462.528pt x 346.896pt>
-File: MCplot_empty.png Graphic file (type png)
-<use MCplot_empty.png>
-Package pdftex.def Info: MCplot_empty.png  used on input line 169.
+<ai_random_plot.png, id=61, 462.528pt x 346.896pt>
+File: ai_random_plot.png Graphic file (type png)
+<use ai_random_plot.png>
+Package pdftex.def Info: ai_random_plot.png  used on input line 168.
 (pdftex.def)             Requested size: 352.31625pt x 264.25241pt.
- [4] [5 <./MCplot_empty.png>] (C:\Users\gilla\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+ [4] [5 <./ai_random_plot.png>] (C:\Users\gilla\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 207.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 206.
  (ai_student.py [6] [7] [8] [9]) [10]
 <dev3.png, id=334, 945.5325pt x 747.79375pt>
 File: dev3.png Graphic file (type png)
 <use dev3.png>
-Package pdftex.def Info: dev3.png  used on input line 240.
+Package pdftex.def Info: dev3.png  used on input line 239.
 (pdftex.def)             Requested size: 352.31625pt x 278.64194pt.
  [11{C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}] [12 <./dev3.png>]
-<ai_student_player=1_N=5.png, id=346, 925.056pt x 458.9145pt>
+<ai_student_player=1_N=5.png, id=346, 469.755pt x 346.896pt>
 File: ai_student_player=1_N=5.png Graphic file (type png)
 <use ai_student_player=1_N=5.png>
 Package pdftex.def Info: ai_student_player=1_N=5.png  used on input line 264.
-(pdftex.def)             Requested size: 352.31625pt x 174.78145pt.
+(pdftex.def)             Requested size: 352.31625pt x 260.17136pt.
 File: ai_student_player=1_N=5.png Graphic file (type png)
 <use ai_student_player=1_N=5.png>
 Package pdftex.def Info: ai_student_player=1_N=5.png  used on input line 276.
-(pdftex.def)             Requested size: 352.31625pt x 174.78145pt.
- [13 <./ai_student_player=1_N=5.png>]
+(pdftex.def)             Requested size: 352.31625pt x 260.17136pt.
+ [13 <./ai_student_player=1_N=5.png>] [14]
 This exam contains 0 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (Devoir3.aux)
  ***********
@@ -839,17 +839,17 @@ Package rerunfilecheck Info: File `Devoir3.out' has not changed.
 (rerunfilecheck)             Checksum: E241A07C1202D9E75B9CB92591390AE7;867.
  ) 
 Here is how much of TeX's memory you used:
- 28613 strings out of 474587
- 545755 string characters out of 5745701
+ 28616 strings out of 474587
+ 545795 string characters out of 5745701
  2559558 words of memory out of 5000000
- 50053 multiletter control sequences out of 15000+600000
- 604683 words of font info for 67 fonts, out of 8000000 for 9000
+ 50054 multiletter control sequences out of 15000+600000
+ 607675 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,87p,637b,2224s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/gilla/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
-Output written on Devoir3.pdf (13 pages, 5612713 bytes).
+Output written on Devoir3.pdf (14 pages, 5613040 bytes).
 PDF statistics:
- 480 PDF objects out of 1000 (max. 8388607)
- 263 named destinations out of 1000 (max. 500000)
+ 484 PDF objects out of 1000 (max. 8388607)
+ 264 named destinations out of 1000 (max. 500000)
  65 words of extra memory for PDF output out of 10000 (max. 10000000)
 

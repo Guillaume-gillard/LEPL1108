@@ -159,7 +159,7 @@ def run_game():
         ####################################################################################
         ### Replace the line below with your own AI for sections 3 and 4 of the homework ###
         ####################################################################################
-        move1 = ai.ai_student(the_board, 1)
+        move1 = ai_random(the_board, 1)
         if the_board[0][move1] != 0:
             print('ERROR: The chosen column is already full.')
         the_board = update_board(the_board, move1, 1)
