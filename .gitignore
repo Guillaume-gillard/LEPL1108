@@ -1,4 +1,4 @@
 # excluding pycache folder
 **/__pycache__/
 # excluding .vscode folder
-.vscode/
+**/.vscode/
