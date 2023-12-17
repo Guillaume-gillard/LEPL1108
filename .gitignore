@@ -1,4 +1,14 @@
-# excluding pycache folder
+# Ignore __pycache__ folders
 **/__pycache__/
-# excluding .vscode folder
+
+# Ignore LaTeX-generated files
+**/*.aux
+**/*.fdb_latexmk
+**/*.fls 
+**/*.log
+**/*.out
+**/*.synctex.gz
+
+
+# Ignore VS Code folder
 **/.vscode/
